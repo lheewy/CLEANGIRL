@@ -17,6 +17,12 @@
             --accent-vert-light: #edf0ee;
             --border-color: #eae3d8;
             --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --trim-empty: #f5efe6;
+            --trim-partial: #ecd9b8;
+            --trim-complete: var(--accent-vert);
+            --trim-bonus: var(--accent-terracotta);
+            --trim-joker: #8f8779;
+            --trim-rattrapage: #8e6b8f;
         }
 
         * {
@@ -439,6 +445,476 @@
             color: var(--accent-terracotta);
             font-weight: 600;
         }
+        /* 90 Days Tracker (Trimestre) */
+        .trim-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin: 4px 0 16px 0;
+        }
+
+        .trim-kicker {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-terracotta);
+        }
+
+        .trim-title {
+            font-size: 30px;
+            font-weight: 300;
+            color: var(--text-main);
+        }
+
+        .trim-period {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: right;
+        }
+
+        .trim-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 10px rgba(61,58,54,0.02);
+        }
+
+        .trim-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent-vert);
+            margin-bottom: 6px;
+        }
+
+        .trim-objective {
+            width: 100%;
+            border: none;
+            border-bottom: 1px dashed var(--border-color);
+            background: transparent;
+            color: var(--text-main);
+            font-size: 16px;
+            font-weight: 500;
+            padding: 6px 0;
+            outline: none;
+        }
+
+        .trim-objective:focus {
+            border-bottom-color: var(--accent-terracotta);
+        }
+
+        .trim-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 16px;
+        }
+
+        .trim-points {
+            font-size: 44px;
+            font-weight: 300;
+            line-height: 1;
+            color: var(--accent-terracotta);
+        }
+
+        .trim-points-label {
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .trim-status {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent-vert);
+            text-align: right;
+        }
+
+        .trim-next-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: right;
+            margin-top: 2px;
+        }
+
+        .trim-bar {
+            height: 6px;
+            background: var(--accent-sable);
+            border-radius: 4px;
+            margin-top: 16px;
+            overflow: hidden;
+        }
+
+        .trim-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-terracotta), #e0a58f);
+            border-radius: 4px;
+            transition: width 0.4s ease;
+        }
+
+        .trim-progress-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        .trim-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 14px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .trim-hint {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin: 6px 0 12px 0;
+        }
+
+        .cal-month {
+            font-size: 22px;
+            font-weight: 300;
+            color: var(--accent-terracotta);
+            margin: 24px 0 10px 0;
+        }
+
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+        }
+
+        .cal-dow {
+            text-align: center;
+            font-size: 10px;
+            color: var(--text-muted);
+            padding-bottom: 2px;
+        }
+
+        .cal-day {
+            position: relative;
+            aspect-ratio: 1 / 1.05;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background: var(--trim-empty);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            padding: 0;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .cal-day small {
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .cal-icon {
+            position: absolute;
+            top: 3px;
+            right: 5px;
+            font-size: 10px;
+        }
+
+        .cal-flag {
+            position: absolute;
+            top: 3px;
+            left: 5px;
+            font-size: 9px;
+        }
+
+        .cal-day.is-partial { background: var(--trim-partial); }
+
+        .cal-day.is-complete,
+        .cal-day.is-joker,
+        .cal-day.is-bonus,
+        .cal-day.is-rattrapage {
+            color: #fff;
+            border-color: transparent;
+        }
+
+        .cal-day.is-complete { background: var(--trim-complete); }
+        .cal-day.is-joker { background: var(--trim-joker); }
+        .cal-day.is-bonus { background: var(--trim-bonus); }
+        .cal-day.is-rattrapage { background: var(--trim-rattrapage); }
+
+        .cal-day.is-today {
+            box-shadow: 0 0 0 2px var(--bg-color), 0 0 0 3px var(--accent-terracotta);
+        }
+
+        /* Day detail sheet */
+        .sheet-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(61,58,54,0.35);
+            z-index: 800;
+            display: none;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .sheet-overlay.open {
+            display: flex;
+        }
+
+        .sheet {
+            background: var(--bg-color);
+            width: 100%;
+            max-width: 520px;
+            max-height: 92vh;
+            overflow-y: auto;
+            border-radius: 24px 24px 0 0;
+            padding: 12px 20px 32px 20px;
+            animation: fadeIn 0.25s ease-out;
+        }
+
+        .sheet-close {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .sheet-close button {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+
+        .sheet-title {
+            font-size: 28px;
+            font-weight: 300;
+            color: var(--text-main);
+            margin: 0 0 18px 0;
+        }
+
+        .seg {
+            display: flex;
+            gap: 8px;
+        }
+
+        .seg-btn {
+            flex: 1;
+            min-width: 0;
+            padding: 12px 6px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .seg-btn.active {
+            background: var(--accent-sable);
+            border-color: var(--accent-terracotta);
+        }
+
+        .seg-btn.active[data-kind="joker"] {
+            background: var(--trim-joker);
+            border-color: var(--trim-joker);
+            color: #fff;
+        }
+
+        .seg-btn.active[data-kind="bonus"] {
+            background: var(--trim-bonus);
+            border-color: var(--trim-bonus);
+            color: #fff;
+        }
+
+        .seg-btn.active[data-kind="rattrapage"] {
+            background: var(--trim-rattrapage);
+            border-color: var(--trim-rattrapage);
+            color: #fff;
+        }
+
+        .jalon-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .jalon-row .seg-btn {
+            flex: 0 0 auto;
+        }
+
+        .jalon-row .trim-hint {
+            margin: 0;
+        }
+
+        .seg-btn.jalon-btn.active {
+            background: var(--accent-vert);
+            border-color: var(--accent-vert);
+            color: #fff;
+        }
+
+        .geste {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 8px;
+        }
+
+        .geste-check {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+            border-radius: 6px;
+            border: 2px solid var(--accent-sable);
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .geste.done .geste-check {
+            background: var(--accent-vert);
+            border-color: var(--accent-vert);
+        }
+
+        .geste.done .geste-check::after {
+            content: "✓";
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .geste-label {
+            flex: 1;
+            min-width: 0;
+            font-size: 14px;
+            color: var(--text-main);
+            word-break: break-word;
+        }
+
+        .geste.done .geste-label {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .geste-pts {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent-terracotta);
+        }
+
+        .geste-del {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 14px;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .geste-add {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .geste-add .form-input {
+            margin-bottom: 0;
+        }
+
+        .geste-add .pts-input {
+            width: 80px;
+            text-align: center;
+        }
+
+        .geste-add .btn-action {
+            flex: 1;
+            width: auto;
+        }
+
+        .btn-mini {
+            background: var(--accent-terracotta);
+            color: #fff;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        /* Rewards */
+        .reward {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 12px;
+        }
+
+        .reward.locked {
+            opacity: 0.6;
+        }
+
+        .reward-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .reward-name {
+            font-size: 22px;
+            font-weight: 300;
+            color: var(--accent-terracotta);
+        }
+
+        .reward-pts {
+            font-size: 13px;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        .reward-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin: 6px 0 12px 0;
+        }
+
+        .reward-foot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .reward-state {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-vert);
+        }
+
+        .reward.locked .reward-state {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -476,7 +952,7 @@
     </header>
 
     <!-- TABS HORIZONTALES (PHASES DE 90 JOURS) -->
-    <div class="tabs">
+    <div class="tabs" id="phase-tabs">
         <div class="tab active" onclick="switchPhase(1)">Phase 1<br><small>Jours 1-30</small></div>
         <div class="tab" onclick="switchPhase(2)">Phase 2<br><small>Jours 31-60</small></div>
         <div class="tab" onclick="switchPhase(3)">Phase 3<br><small>Jours 61-90</small></div>
@@ -514,6 +990,80 @@
         </div>
     </div>
 
+    <!-- PANNEAU : SUIVI 90 JOURS (TRIMESTRE) -->
+    <div id="section-trimestre" class="content-section">
+        <div class="trim-header">
+            <div>
+                <div class="trim-kicker">Ton trimestre</div>
+                <div class="trim-title">90 jours</div>
+            </div>
+            <div class="trim-period" id="trim-period"></div>
+        </div>
+
+        <div class="trim-card">
+            <div class="trim-label">Objectif du trimestre</div>
+            <input type="text" id="trim-objective" class="trim-objective" placeholder="Ex. Mon objectif du trimestre" onchange="saveObjective()">
+
+            <div class="trim-stats">
+                <div>
+                    <div class="trim-points" id="trim-points">0</div>
+                    <div class="trim-points-label">pts du trimestre</div>
+                </div>
+                <div>
+                    <div class="trim-status" id="trim-status">En veille</div>
+                    <div class="trim-next-text" id="trim-next-text"></div>
+                </div>
+            </div>
+            <div class="trim-bar"><div class="trim-bar-fill" id="trim-bar-fill"></div></div>
+            <div class="trim-progress-text" id="trim-progress-text"></div>
+        </div>
+
+        <div class="trim-legend">
+            <span>☾ Joker</span>
+            <span>☆ Bonus ×2</span>
+            <span>↺ Rattrapage</span>
+            <span>⚑ Jalon</span>
+        </div>
+
+        <div id="trim-calendar"></div>
+
+        <div class="section-title" style="margin-top: 28px;"><span>Récompenses du trimestre</span></div>
+        <p class="trim-hint">Les gestes cochés alimentent ce compteur, cumulé sur tout le trimestre. Chaque récompense ne se réclame qu'une fois.</p>
+        <div id="trim-rewards"></div>
+    </div>
+
+    <!-- FEUILLE : DÉTAIL D'UNE JOURNÉE -->
+    <div class="sheet-overlay" id="day-sheet" onclick="if (event.target === this) closeDaySheet()">
+        <div class="sheet">
+            <div class="sheet-close"><button onclick="closeDaySheet()" aria-label="Fermer">✕</button></div>
+            <div class="sheet-title" id="sheet-title"></div>
+
+            <div class="trim-label">Statut de la journée</div>
+            <div class="seg">
+                <button class="seg-btn" data-kind="joker" onclick="setDayStatus('joker')">☾ Joker</button>
+                <button class="seg-btn" data-kind="bonus" onclick="setDayStatus('bonus')">☆ Bonus ×2</button>
+                <button class="seg-btn" data-kind="rattrapage" onclick="setDayStatus('rattrapage')">↺ Rattrapage</button>
+            </div>
+            <p class="trim-hint" id="sheet-status-hint"></p>
+
+            <div class="jalon-row">
+                <button class="seg-btn jalon-btn" id="sheet-jalon" onclick="toggleJalon()">⚑ Jalon</button>
+                <span class="trim-hint">Marque cette journée comme jalon. Cumulable avec un statut.</span>
+            </div>
+
+            <div class="trim-label" style="margin-top: 22px;">Gestes du jour</div>
+            <div id="sheet-gestes"></div>
+
+            <div class="trim-label" style="margin-top: 16px;">Ajouter un geste</div>
+            <input type="text" id="geste-label" class="form-input" placeholder="Ex. Préparer le dossier">
+            <div class="geste-add">
+                <input type="number" id="geste-pts" class="form-input pts-input" value="10" min="0" inputmode="numeric">
+                <span class="trim-hint" style="margin: 0;">pts</span>
+                <button class="btn-action" onclick="addGeste()">+ Ajouter</button>
+            </div>
+        </div>
+    </div>
+
     <!-- PANNEAU : CONFIGURATION & PARAMÈTRES -->
     <div id="section-settings" class="content-section">
         <div class="section-title">Synchronisation Globale</div>
@@ -548,6 +1098,10 @@
             <span class="nav-icon">✨</span>
             <span>Protocole</span>
         </div>
+        <div class="nav-item" id="nav-btn-trimestre" onclick="switchNav('trimestre')">
+            <span class="nav-icon">📅</span>
+            <span>90 jours</span>
+        </div>
         <div class="nav-item" id="nav-btn-settings" onclick="switchNav('settings')">
             <span class="nav-icon">⚙️</span>
             <span>Paramètres</span>
@@ -559,12 +1113,12 @@
         const initialRoutines = {
             1: {
                 matin: [
-                    { id: 'm1', time: '15 min', title: 'Journaling Thérapeutique', desc: 'Écriture fluide de 250 mots. Vidage de l'esprit, intentions et résonance numérique.', checked: false },
+                    { id: 'm1', time: '15 min', title: 'Journaling Thérapeutique', desc: 'Écriture fluide de 250 mots. Vidage de l’esprit, intentions et résonance numérique.', checked: false },
                     { id: 'm2', time: '15 min', title: 'Lecture Focus', desc: '15 pages complètes orientées expansion personnelle et découverte des typologies Human Design.', checked: false },
                     { id: 'm3', time: '30 min', title: 'Focus Business & Langue', desc: '15 min apprentissage linguistique chill + 15 min structuration de ton business de 0 à 6 chiffres.', checked: false }
                 ],
                 maison: [
-                    { id: 'h1', time: '30 min', title: 'Maison Sacrée Clean & Quick', desc: '5min aération/lit, 15min reset des comptoirs, 10min entretien express d'une zone (flux épuré Moleskine).', checked: false }
+                    { id: 'h1', time: '30 min', title: 'Maison Sacrée Clean & Quick', desc: '5min aération/lit, 15min reset des comptoirs, 10min entretien express d’une zone (flux épuré Moleskine).', checked: false }
                 ],
                 soir: [
                     { id: 's1', time: '10 min', title: 'Posture & Élocution Consciente', desc: 'Maintien droit, diction ralentie face au miroir, sélection rigoureuse et sophistiquée de vos mots.', checked: false },
@@ -573,12 +1127,12 @@
             },
             2: {
                 matin: [
-                    { id: 'm2_1', time: '15 min', title: 'Journaling d'Élite', desc: 'Écriture axée sur la déconstruction des barrières financières et ton identité vibratoire à 6 chiffres.', checked: false },
-                    { id: 'm2_2', time: '15 min', title: 'Lecture Sophistiquée', desc: '15 pages de littérature classique ou d'essais sur la haute éloquence de la posture féminine.', checked: false },
+                    { id: 'm2_1', time: '15 min', title: 'Journaling d’Élite', desc: 'Écriture axée sur la déconstruction des barrières financières et ton identité vibratoire à 6 chiffres.', checked: false },
+                    { id: 'm2_2', time: '15 min', title: 'Lecture Sophistiquée', desc: '15 pages de littérature classique ou d’essais sur la haute éloquence de la posture féminine.', checked: false },
                     { id: 'm2_3', time: '30 min', title: 'Sport Signature (Dès 10 Août)', desc: '30 min de mouvement ciblé (Pilates, HIIT ou Yoga) pour ancrer la grâce corporelle.', checked: false }
                 ],
                 maison: [
-                    { id: 'h2_1', time: '30 min', title: 'Maintien Épuré Hebdomadaire', desc: 'Optimisation de l'environnement visuel sans friction. Tout doit respirer le calme.', checked: false }
+                    { id: 'h2_1', time: '30 min', title: 'Maintien Épuré Hebdomadaire', desc: 'Optimisation de l’environnement visuel sans friction. Tout doit respirer le calme.', checked: false }
                 ],
                 soir: [
                     { id: 's2_1', time: '10 min', title: 'Élocution & Diction Royale', desc: 'Articuler calmement. Pratique consciente de la parole pour asseoir son autorité charismatique.', checked: false },
@@ -587,12 +1141,12 @@
             },
             3: {
                 matin: [
-                    { id: 'm3_1', time: '15 min', title: 'Journaling de Manifestation', desc: 'Écrire au présent comme si la liberté des 6 chiffres et le magnétisme d'opportunités étaient acquis.', checked: false },
-                    { id: 'm3_2', time: '15 min', title: 'Lecture Haute Fréquence', desc: '15 pages d'analyses stratégiques avancées ou de biographies de femmes inspirantes.', checked: false },
+                    { id: 'm3_1', time: '15 min', title: 'Journaling de Manifestation', desc: 'Écrire au présent comme si la liberté des 6 chiffres et le magnétisme d’opportunités étaient acquis.', checked: false },
+                    { id: 'm3_2', time: '15 min', title: 'Lecture Haute Fréquence', desc: '15 pages d’analyses stratégiques avancées ou de biographies de femmes inspirantes.', checked: false },
                     { id: 'm3_3', time: '30 min', title: 'Mouvement Énergétique Intense', desc: 'Activation cardiovasculaire ou renforcement fluide pour maximiser le charisme physique.', checked: false }
                 ],
                 maison: [
-                    { id: 'h3_1', time: '30 min', title: 'Sanctuaire de Vie Idéal', desc: 'Mise en ordre instinctive, aucun objet superflu. L'espace reflète la clarté financière.', checked: false }
+                    { id: 'h3_1', time: '30 min', title: 'Sanctuaire de Vie Idéal', desc: 'Mise en ordre instinctive, aucun objet superflu. L’espace reflète la clarté financière.', checked: false }
                 ],
                 soir: [
                     { id: 's3_1', time: '15 min', title: 'Sophistication Intégrale & Mots', desc: 'Rétrospective sur ta parole du jour. Rectification gracieuse et positionnement noble.', checked: false },
@@ -614,6 +1168,7 @@
             initDragAndDrop();
             initSettingsValues();
             setupLocalNotifications();
+            initTrimester();
         });
 
         // SECURITY CHECK
@@ -684,9 +1239,16 @@
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             
+            // Phase tabs only belong to the daily routine view
+            document.getElementById('phase-tabs').style.display = target === 'routine' ? '' : 'none';
+
             if (target === 'routine') {
                 document.getElementById('section-routine').classList.add('active');
                 document.getElementById('nav-btn-routine').classList.add('active');
+            } else if (target === 'trimestre') {
+                document.getElementById('section-trimestre').classList.add('active');
+                document.getElementById('nav-btn-trimestre').classList.add('active');
+                renderTrimester();
             } else if (target === 'settings') {
                 document.getElementById('section-settings').classList.add('active');
                 document.getElementById('nav-btn-settings').classList.add('active');
@@ -923,6 +1485,266 @@
         function autoCloudSyncSilent() {
             // Automatic silent update tracking framework
             console.log("Silent cloud updates pushed to global node registry for user:", userEmail);
+        }
+
+        // 90-DAY TRACKER (TRIMESTRE)
+        const TRIM_START = new Date(2026, 9, 1); // Premier jour du trimestre : 1er octobre 2026
+        const TRIM_DAYS = 90;
+        const TRIM_MONTHS = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+        const TRIM_WEEKDAYS = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+        const TRIM_STATUTS = {
+            joker: { icon: '☾', hint: 'Journée joker : une respiration assumée, sans culpabilité.' },
+            bonus: { icon: '☆', hint: 'Journée bonus — les points des gestes cochés ce jour comptent double.' },
+            rattrapage: { icon: '↺', hint: 'Journée de rattrapage : tu reprends un geste laissé de côté.' }
+        };
+        // Sorted by threshold: the next reward is always TRIM_REWARDS[number of rewards reached]
+        const TRIM_REWARDS = [
+            { pts: 100, name: 'Premier élan', desc: 'Le trimestre est lancé — offre-toi un plaisir simple pour marquer le départ.' },
+            { pts: 250, name: 'Cap tenu', desc: 'Mi-parcours tenu : une sortie ou un achat plaisir, choisi à l’avance.' },
+            { pts: 450, name: 'Trimestre accompli', desc: 'La grande récompense de tes 90 jours — celle qui te fait vraiment envie.' }
+        ];
+
+        let trimData = loadTrimData();
+        let trimSheetKey = null;
+
+        function loadTrimData() {
+            try {
+                const saved = JSON.parse(localStorage.getItem('inspirée_trimestre'));
+                if (saved && saved.days) return saved;
+            } catch (e) {
+                // Corrupted or unavailable storage: start with a blank trimester
+            }
+            return { objectif: '', days: {}, reclamees: [] };
+        }
+
+        function saveTrimData() {
+            localStorage.setItem('inspirée_trimestre', JSON.stringify(trimData));
+            if (userEmail) autoCloudSyncSilent();
+        }
+
+        // Dates are keyed as local YYYY-MM-DD to avoid timezone shifts
+        function trimDateAt(index) {
+            return new Date(TRIM_START.getFullYear(), TRIM_START.getMonth(), TRIM_START.getDate() + index);
+        }
+
+        function trimKey(date) {
+            const mm = String(date.getMonth() + 1).padStart(2, '0');
+            const dd = String(date.getDate()).padStart(2, '0');
+            return `${date.getFullYear()}-${mm}-${dd}`;
+        }
+
+        function readTrimDay(key) {
+            return trimData.days[key] || { statut: null, jalon: false, gestes: [] };
+        }
+
+        function writeTrimDay(key) {
+            if (!trimData.days[key]) trimData.days[key] = { statut: null, jalon: false, gestes: [] };
+            return trimData.days[key];
+        }
+
+        function trimDayStats(day) {
+            const done = day.gestes.filter(g => g.done).length;
+            const base = day.gestes.reduce((sum, g) => sum + (g.done ? g.pts : 0), 0);
+            return {
+                done,
+                total: day.gestes.length,
+                points: day.statut === 'bonus' ? base * 2 : base
+            };
+        }
+
+        function trimTotals() {
+            const totals = { done: 0, total: 0, points: 0 };
+            for (let i = 0; i < TRIM_DAYS; i++) {
+                const stats = trimDayStats(readTrimDay(trimKey(trimDateAt(i))));
+                totals.done += stats.done;
+                totals.total += stats.total;
+                totals.points += stats.points;
+            }
+            return totals;
+        }
+
+        function initTrimester() {
+            const end = trimDateAt(TRIM_DAYS - 1);
+            document.getElementById('trim-period').innerText = `${TRIM_MONTHS[TRIM_START.getMonth()]} – ${TRIM_MONTHS[end.getMonth()]} ${end.getFullYear()}`;
+            document.getElementById('trim-objective').value = trimData.objectif || '';
+            renderTrimester();
+        }
+
+        function renderTrimester() {
+            const totals = trimTotals();
+            renderTrimStats(totals);
+            renderTrimCalendar();
+            renderTrimRewards(totals.points);
+        }
+
+        function renderTrimStats(totals) {
+            const reached = TRIM_REWARDS.filter(r => totals.points >= r.pts);
+            const next = TRIM_REWARDS[reached.length];
+            const base = reached.length ? reached[reached.length - 1].pts : 0;
+            const fill = next ? (totals.points - base) / (next.pts - base) : 1;
+
+            document.getElementById('trim-points').innerText = totals.points;
+            document.getElementById('trim-status').innerText = !reached.length ? 'En veille' : next ? 'En route' : 'Accompli';
+            document.getElementById('trim-next-text').innerText = next
+                ? `${next.pts - totals.points} pts avant ${next.name}`
+                : 'Toutes les récompenses sont débloquées';
+            document.getElementById('trim-bar-fill').style.width = `${Math.min(100, Math.round(fill * 100))}%`;
+            document.getElementById('trim-progress-text').innerText = `${totals.done}/${totals.total} gestes réalisés sur le trimestre`;
+        }
+
+        function renderTrimCalendar() {
+            const today = trimKey(new Date());
+            const headers = ['L', 'M', 'M', 'J', 'V', 'S', 'D'].map(d => `<div class="cal-dow">${d}</div>`).join('');
+            let html = '';
+            let currentMonth = null;
+
+            for (let i = 0; i < TRIM_DAYS; i++) {
+                const date = trimDateAt(i);
+                if (date.getMonth() !== currentMonth) {
+                    if (currentMonth !== null) html += '</div>';
+                    currentMonth = date.getMonth();
+                    html += `<div class="cal-month">${TRIM_MONTHS[currentMonth]}</div><div class="cal-grid">${headers}`;
+                    html += '<div></div>'.repeat((date.getDay() + 6) % 7); // La semaine commence le lundi
+                }
+
+                const key = trimKey(date);
+                const day = readTrimDay(key);
+                const stats = trimDayStats(day);
+                let state = 'is-empty';
+                if (day.statut) state = `is-${day.statut}`;
+                else if (stats.total && stats.done === stats.total) state = 'is-complete';
+                else if (stats.done) state = 'is-partial';
+
+                const flag = day.jalon ? '<span class="cal-flag">⚑</span>' : '';
+                const icon = day.statut ? `<span class="cal-icon">${TRIM_STATUTS[day.statut].icon}</span>` : '';
+                const todayClass = key === today ? 'is-today' : '';
+
+                html += `<button class="cal-day ${state} ${todayClass}" onclick="openDaySheet('${key}')">
+                    ${flag}${icon}
+                    <span>${date.getDate()}</span>
+                    <small>${stats.total ? `${stats.done}/${stats.total}` : '–'}</small>
+                </button>`;
+            }
+            html += '</div>';
+            document.getElementById('trim-calendar').innerHTML = html;
+        }
+
+        function renderTrimRewards(points) {
+            document.getElementById('trim-rewards').innerHTML = TRIM_REWARDS.map((reward, i) => {
+                const reached = points >= reward.pts;
+                const claimed = trimData.reclamees.includes(i);
+                const state = claimed ? 'Réclamée ✓' : reached ? 'Débloquée' : `${reward.pts - points} pts restants`;
+                const action = reached && !claimed ? `<button class="btn-mini" onclick="claimReward(${i})">Réclamer</button>` : '';
+                return `
+                <div class="reward ${reached ? '' : 'locked'}">
+                    <div class="reward-head">
+                        <div class="reward-name">${reward.name}</div>
+                        <div class="reward-pts">${reward.pts} pts</div>
+                    </div>
+                    <div class="reward-desc">${reward.desc}</div>
+                    <div class="reward-foot">
+                        <span class="reward-state">${state}</span>
+                        ${action}
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function claimReward(index) {
+            const reward = TRIM_REWARDS[index];
+            if (trimTotals().points < reward.pts || trimData.reclamees.includes(index)) return;
+            trimData.reclamees.push(index);
+            saveTrimData();
+            renderTrimester();
+        }
+
+        function saveObjective() {
+            trimData.objectif = document.getElementById('trim-objective').value.trim();
+            saveTrimData();
+        }
+
+        // DAY DETAIL SHEET
+        function openDaySheet(key) {
+            trimSheetKey = key;
+            renderDaySheet();
+            document.getElementById('day-sheet').classList.add('open');
+        }
+
+        function closeDaySheet() {
+            trimSheetKey = null;
+            document.getElementById('day-sheet').classList.remove('open');
+            renderTrimester();
+        }
+
+        function renderDaySheet() {
+            if (!trimSheetKey) return;
+            const [y, m, d] = trimSheetKey.split('-').map(Number);
+            const date = new Date(y, m - 1, d);
+            document.getElementById('sheet-title').innerText = `${TRIM_WEEKDAYS[date.getDay()]} ${date.getDate()} ${TRIM_MONTHS[date.getMonth()].toLowerCase()}`;
+
+            const day = readTrimDay(trimSheetKey);
+            document.querySelectorAll('.seg-btn[data-kind]').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.kind === day.statut);
+            });
+            document.getElementById('sheet-jalon').classList.toggle('active', day.jalon);
+            document.getElementById('sheet-status-hint').innerText = day.statut ? TRIM_STATUTS[day.statut].hint : '';
+
+            document.getElementById('sheet-gestes').innerHTML = day.gestes.length
+                ? day.gestes.map((g, i) => `
+                    <div class="geste ${g.done ? 'done' : ''}">
+                        <div class="geste-check" onclick="toggleGeste(${i})"></div>
+                        <div class="geste-label">${escapeHtml(g.label)}</div>
+                        <div class="geste-pts">+${g.pts}</div>
+                        <button class="geste-del" onclick="deleteGeste(${i})" aria-label="Supprimer">✕</button>
+                    </div>`).join('')
+                : '<p class="trim-hint">Aucun geste pour cette journée.</p>';
+        }
+
+        function escapeHtml(text) {
+            const el = document.createElement('div');
+            el.innerText = text;
+            return el.innerHTML;
+        }
+
+        function afterTrimChange() {
+            saveTrimData();
+            renderDaySheet();
+            renderTrimester();
+        }
+
+        function setDayStatus(kind) {
+            const day = writeTrimDay(trimSheetKey);
+            day.statut = day.statut === kind ? null : kind; // Statuts exclusifs, re-tap to clear
+            afterTrimChange();
+        }
+
+        function toggleJalon() {
+            const day = writeTrimDay(trimSheetKey);
+            day.jalon = !day.jalon;
+            afterTrimChange();
+        }
+
+        function addGeste() {
+            const labelInput = document.getElementById('geste-label');
+            const ptsInput = document.getElementById('geste-pts');
+            const label = labelInput.value.trim();
+            const pts = parseInt(ptsInput.value, 10);
+            if (!label) { alert('Décris le geste à ajouter.'); return; }
+            if (isNaN(pts) || pts < 0) { alert('Indique un nombre de points valide.'); return; }
+            writeTrimDay(trimSheetKey).gestes.push({ label, pts, done: false });
+            labelInput.value = '';
+            afterTrimChange();
+        }
+
+        function toggleGeste(index) {
+            const geste = writeTrimDay(trimSheetKey).gestes[index];
+            geste.done = !geste.done;
+            afterTrimChange();
+        }
+
+        function deleteGeste(index) {
+            writeTrimDay(trimSheetKey).gestes.splice(index, 1);
+            afterTrimChange();
         }
 
         // NOTIFICATIONS RULES ENGINE
